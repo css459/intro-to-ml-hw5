@@ -57,9 +57,9 @@ class Pegasos:
                     w = (1 - eta_t * self.lamb) * w
 
             # Evaluate the epoch
-            obj = Pegasos._objective(X, y, w, self.lamb)
+            obj = self._objective(X, y, w, self.lamb)
             train_hist.append([obj, t])
-            print("[Epoch=" + str(i) + " | Iter=" + str(t) + "] Objective: " + str(obj))
+            # print("[Epoch=" + str(i) + " | Iter=" + str(t) + "] Objective: " + str(obj))
 
         self.w = w
         return w

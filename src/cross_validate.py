@@ -26,16 +26,16 @@ def cv(X, y, lamb):
 def plot_lambdas(cv_score, lambdas):
     plt.plot(lambdas, cv_score)
     plt.title("Cross Validated Avg. Accuracy vs. Lambda \nfor One Vs All Pegasos")
-    plt.xlabel("Lambda for Pegasos")
+    plt.xlabel("Lambda for Pegasos (log2)")
     plt.ylabel("CV Average Accuracy (k = 5)")
     plt.show()
 
 
 def find_best(X, y):
-    lambas = [2 ** i for i in range(5, 0, -1)]
+    lambas = [2 ** i for i in range(-5, 2)]
     cv_score = [cv(X, y, lamb=l) for l in lambas]
 
     # Plot the scores
     plot_lambdas(cv_score, lambas)
 
-    return sorted(zip(cv_score, lambas))[0]
+    return sorted(zip(cv_score, lambas), reverse=True)[0]

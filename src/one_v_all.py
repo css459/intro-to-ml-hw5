@@ -35,19 +35,23 @@ class OneVAllClassifier:
 
     def predict(self, X):
         # Array of (prediction_proba, class)
-        preds = []
+        y = []
 
         # Get prediction for each class
-        for c in self.weight_vectors.keys():
-            w = self.weight_vectors[c]
-            preds.append((c, np.dot(X, w)))
+        for x in X:
+            preds = []
+            for c in self.weight_vectors.keys():
+                w = self.weight_vectors[c]
+                preds.append((np.dot(x, w), c))
 
-        print(preds)
+            # Return the maximum
+            best = max(preds)[1]
+            y.append(best)
 
-        # Return the maximum
-        self.best = sorted(preds)[0][1]
-        return self.best
+        print(y)
+
+        return y
 
     def test(self, X, y):
-        w = self.weight_vectors[self.best]
-        return accuracy_score(y, np.dot(X, w))
+        p = self.predict(X)
+        return accuracy_score(y, p)
