@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.metrics import accuracy_score
 
 from src.pegasos import Pegasos
 
@@ -10,6 +11,9 @@ class OneVAllClassifier:
 
         # Dictionary of {target_class: [vector]}
         self.weight_vectors = {}
+
+        # Key in self.weight_vectors
+        self.best = None
 
         # TODO
         self.clf = Pegasos(lamb=lamb)
@@ -41,4 +45,9 @@ class OneVAllClassifier:
         print(preds)
 
         # Return the maximum
-        return sorted(preds)[0][1]
+        self.best = sorted(preds)[0][1]
+        return self.best
+
+    def test(self, X, y):
+        w = self.weight_vectors[self.best]
+        return accuracy_score(y, np.dot(X, w))

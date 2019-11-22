@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
+from sklearn.metrics import accuracy_score
 
 
 class Pegasos:
@@ -80,8 +80,8 @@ class Pegasos:
         # for scoring, assume a 0 is a 1.
         y_pred = np.where(y_pred == 0, 1, y_pred)
 
-        print("F1 Score:", f1_score(y, y_pred))
-        print("Accuracy:", accuracy_score(y, y_pred))
-        print(confusion_matrix(y, y_pred))
+        # print("F1 Score:", f1_score(y, y_pred))
+        # print("Accuracy:", accuracy_score(y, y_pred))
+        # print(confusion_matrix(y, y_pred))
 
         return accuracy_score(y, y_pred)
